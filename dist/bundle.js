@@ -20190,22 +20190,50 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * dont require with webpack since electron is resolved in electron runtime
+	 * http://stackoverflow.com/questions/34427446
+	 */
+	var ipc = window.require('electron').ipcRenderer;
+
+	console.log('ipc: ', ipc);
+
 	var App = function (_Component) {
 	    _inherits(App, _Component);
 
-	    function App() {
+	    function App(props) {
 	        _classCallCheck(this, App);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+
+	        _this.state = {
+	            screens: []
+	        };
+
+	        // request app data from electron main process main.js
+	        ipc.send('get-app-data');
+
+	        // main process responds with application data
+	        ipc.on('app-data', function (event, data) {
+	            console.log('react received data: ', data);
+
+	            _this.setState({ screens: data.screens });
+	        });
+	        return _this;
 	    }
 
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
+
+	            var screens = this.state.screens.length && this.state.screens.map(function (screen) {
+	                return _react2.default.createElement(_Screen2.default, { dimensions: screen.bounds });
+	            });
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_Screen2.default, null),
+	                screens,
 	                _react2.default.createElement(
 	                    'h1',
 	                    null,
