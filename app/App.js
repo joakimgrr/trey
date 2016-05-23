@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Screen from './components/Screen/Screen.js';
+import Screens from './containers/Screens/Screens.js';
 
 /**
  * dont require with webpack since electron is resolved in electron runtime
@@ -32,15 +32,9 @@ export default class App extends Component {
     }
 
     render() {
-
-        let screens = this.state.screens.length && this.state.screens.map((screen) => {
-            return <Screen dimensions={screen.bounds}/>
-        });
-
         return (
             <div>
-                {screens}
-                <h1> Hello, world. </h1>
+                <Screens screens={this.state.screens} />
             </div>
         );
     }

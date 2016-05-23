@@ -20176,9 +20176,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Screen = __webpack_require__(170);
+	var _Screens = __webpack_require__(177);
 
-	var _Screen2 = _interopRequireDefault(_Screen);
+	var _Screens2 = _interopRequireDefault(_Screens);
 
 	__webpack_require__(175);
 
@@ -20225,20 +20225,10 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
-
-	            var screens = this.state.screens.length && this.state.screens.map(function (screen) {
-	                return _react2.default.createElement(_Screen2.default, { dimensions: screen.bounds });
-	            });
-
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                screens,
-	                _react2.default.createElement(
-	                    'h1',
-	                    null,
-	                    ' Hello, world. '
-	                )
+	                _react2.default.createElement(_Screens2.default, { screens: this.state.screens })
 	            );
 	        }
 	    }]);
@@ -20704,6 +20694,115 @@
 
 	// module
 	exports.push([module.id, "body {\n  font-family: 'Roboto', sans-serif;\n  background-color: #252830;\n  color: #fff; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Screen = __webpack_require__(170);
+
+	var _Screen2 = _interopRequireDefault(_Screen);
+
+	__webpack_require__(178);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Screens = function (_Component) {
+	    _inherits(Screens, _Component);
+
+	    function Screens() {
+	        _classCallCheck(this, Screens);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Screens).apply(this, arguments));
+	    }
+
+	    _createClass(Screens, [{
+	        key: 'render',
+	        value: function render() {
+	            var screens = this.props.screens.length && this.props.screens.map(function (screen) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'screens__single-container' },
+	                    _react2.default.createElement(_Screen2.default, { key: screen.id, dimensions: screen.bounds })
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'screens' },
+	                screens
+	            );
+	        }
+	    }]);
+
+	    return Screens;
+	}(_react.Component);
+
+	Screens.propTypes = {
+	    screens: _react2.default.PropTypes.array.isRequired
+	};
+	Screens.defaultProps = {
+	    screens: []
+	};
+	exports.default = Screens;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(179);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(174)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Screens.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Screens.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(173)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".screens {\n  text-align: center; }\n\n.screens__single-container {\n  width: 33%;\n  box-sizing: border-box;\n  display: inline-block; }\n", ""]);
 
 	// exports
 
